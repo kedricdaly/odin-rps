@@ -49,6 +49,8 @@ function playRound(playerSelection, computerSelection) {
     //    0 if player ties
     //   -1 if player loses
     playerSelection = playerSelection.toLowerCase()
+
+    console.log(`player: ${playerSelection}\tcomputer: ${computerSelection}`)
     if (playerSelection === computerSelection) {
         return 0
     }
@@ -82,9 +84,24 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
-
-
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(`player: ${playerSelection}  computer: ${computerSelection}`)
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    const nGames = 5;
+    var currLead = 0;
+    const msg = "rock, paper, or scissors?"
+    for (let i = 0; i < nGames; i++) {
+        currLead += playRound(prompt(msg),getComputerChoice())
+        // check if we've passed halfway yet
+        if (Math.abs(currLead) == Math.ceil(nGames / 2)) {
+            break
+        }
+    }
+    if (currLead > 0) {
+        return `Player wins by ${currLead}! Congratulations!`
+    }
+    else if (currLead < 0) {
+        return `Computer wins by ${Math.abs(currLead)} . Better luck next time.`
+    }
+    else {
+        return "It's a tie! Try again?"
+    }
+}

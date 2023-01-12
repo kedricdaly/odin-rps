@@ -3,13 +3,13 @@ function getComputerChoice() {
     var randInt = Math.floor(Math.random() * nChoices);
 
     if (randInt === 0) {
-        return "Rock"
+        return "rock"
     }
     else if (randInt == 1) {
-        return "Paper"
+        return "paper"
     }
     else {
-        return "Scissors"
+        return "scissors"
     }
 
   }
@@ -22,13 +22,13 @@ function checkComputerDistribution() {
 
     for (let i = 0; i < largeN; i++) {
         thisChoice = getComputerChoice()
-        if (thisChoice === "Rock") {
+        if (thisChoice === "rock") {
             nRock += 1;
         }
-        else if (thisChoice === "Paper") {
+        else if (thisChoice === "paper") {
             nPaper += 1;
         }
-        else if (thisChoice === "Scissors") {
+        else if (thisChoice === "scissors") {
             nScissors += 1;
         }
         else {
@@ -39,4 +39,9 @@ function checkComputerDistribution() {
     outStr = `nRock: ${nRock*100/largeN}, nPaper: ${nPaper*100/largeN}, nScissors: ${nScissors*100/largeN} `
     console.log(outStr)
     return
+}
+
+function playRound(playerSelection, computerSelection) {
+    // parse player input
+
 }

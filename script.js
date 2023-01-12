@@ -43,5 +43,48 @@ function checkComputerDistribution() {
 
 function playRound(playerSelection, computerSelection) {
     // parse player input
+    // does not check for valid input
+    // win encoding is player-focused
+    //   +1 if player wins
+    //    0 if player ties
+    //   -1 if player loses
+    playerSelection = playerSelection.toLowerCase()
+    if (playerSelection === computerSelection) {
+        return 0
+    }
 
+    if (playerSelection === "rock") {
+        if (computerSelection === "scissors") {
+            return 1
+        }
+        else {
+            return -1
+        }
+    }
+
+    if (playerSelection === "paper") {
+        if (computerSelection === "rock") {
+            return 1
+        }
+        else {
+            return -1
+        }
+    }
+
+    if (playerSelection === "scissors") {
+        if (computerSelection === "paper") {
+            return 1
+        }
+        else {
+            return -1
+        }
+    }
+    
 }
+
+
+
+const playerSelection = "rock";
+const computerSelection = getComputerChoice();
+console.log(`player: ${playerSelection}  computer: ${computerSelection}`)
+console.log(playRound(playerSelection, computerSelection));

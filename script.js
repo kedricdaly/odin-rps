@@ -88,6 +88,7 @@ function game() {
     const nGames = 5;
     var currLead = 0;
     const msg = "rock, paper, or scissors?"
+    /*
     for (let i = 0; i < nGames; i++) {
         currLead += playRound(prompt(msg),getComputerChoice())
         // check if we've passed halfway yet
@@ -95,6 +96,8 @@ function game() {
             break
         }
     }
+    */
+   
     if (currLead > 0) {
         return `Player wins by ${currLead}! Congratulations!`
     }

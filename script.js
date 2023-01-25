@@ -50,7 +50,21 @@ function playRound(playerSelection, computerSelection) {
     //   -1 if player loses
     playerSelection = playerSelection.toLowerCase()
 
-    console.log(`player: ${playerSelection}\tcomputer: ${computerSelection}`)
+    // only add a round audit div if it does not already exist
+    // locate the div before the result div
+    const result = document.querySelector('.result');
+    const body = document.querySelector('body');
+    let roundLog = document.querySelector('.roundAudit');
+    if (!roundLog) {
+        roundLog = document.createElement('div')
+        roundLog.setAttribute('class', 'roundAudit')
+        body.insertBefore(roundLog, result)
+    }
+       
+
+    let roundAudit = `player: ${playerSelection}\ncomputer: ${computerSelection}`
+    roundLog.innerText = roundAudit;
+
     if (playerSelection === computerSelection) {
         return 0
     }
@@ -84,24 +98,69 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
-function game() {
-    const nGames = 5;
-    var currLead = 0;
-    const msg = "rock, paper, or scissors?"
-    for (let i = 0; i < nGames; i++) {
-        currLead += playRound(prompt(msg),getComputerChoice())
-        // check if we've passed halfway yet
-        if (Math.abs(currLead) == Math.ceil(nGames / 2)) {
-            break
-        }
+function playRoundWrapper(e) {
+
+    const selection = e.target.innerText;
+    const pScore = document.querySelector('.pScore');
+    const cScore = document.querySelector('.cScore');
+
+    let roundScore = playRound(selection, getComputerChoice());
+
+    if (roundScore > 0) {
+        pScore.innerText = parseInt(pScore.innerText) + 1;
+    } else if (roundScore < 0) {
+        cScore.innerText = parseInt(cScore.innerText) + 1;
     }
-    if (currLead > 0) {
-        return `Player wins by ${currLead}! Congratulations!`
+    
+    if (parseInt(pScore.innerText) === 5) {
+        endGame(1)
+
+    } else if (parseInt(cScore.innerText) === 5) {
+        endGame(0)
     }
-    else if (currLead < 0) {
-        return `Computer wins by ${Math.abs(currLead)} . Better luck next time.`
-    }
-    else {
-        return "It's a tie! Try again?"
-    }
+
 }
+
+function startGame() {
+    
+    document.querySelector('.pScore').innerText = 0;
+    document.querySelector('.cScore').innerText = 0;
+    document.querySelector('.result').innerText='';
+    const roundAudit = document.querySelector('.roundAudit');
+    const refreshBtn = document.querySelector('.refreshBtn');
+    if (roundAudit) {
+        roundAudit.remove();
+    }
+    if (refreshBtn) {
+        refreshBtn.remove();
+    }
+
+    const selections = document.querySelectorAll('.selection');
+    selections.forEach(selection => selection.addEventListener('click', playRoundWrapper)); 
+}
+
+function endGame(winner) {
+    
+    let winnerText = '';
+    if (winner === 1) {
+        winnerText = "You win!"
+    } else if (winner === 0) {
+        winnerText = "Computer wins :("
+    }
+
+    // clean up event listeners on buttons to end the game
+    const selections = document.querySelectorAll('.selection');
+    selections.forEach(selection => selection.removeEventListener('click', playRoundWrapper));
+    const result = document.querySelector('.result');
+    result.innerText = winnerText;
+
+    const refreshBtn = document.createElement('button');
+    refreshBtn.setAttribute('class', 'refreshBtn');
+    refreshBtn.innerText = "Play again?";
+    refreshBtn.addEventListener('click', startGame)
+    result.appendChild(refreshBtn);
+
+
+}
+
+window.addEventListener('load', startGame)

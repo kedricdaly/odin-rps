@@ -1,0 +1,10 @@
+/* * {
+    border-color: red;
+    border-style: solid;
+    border-width: 2px;
+} */
+
+.score-parent {
+    display: flex;
+    gap: 1rem;
+}

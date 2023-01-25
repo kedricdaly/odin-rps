@@ -1,10 +1,36 @@
-/* * {
-    border-color: red;
-    border-style: solid;
-    border-width: 2px;
-} */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.selections {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-bottom: 25px;
+}
+
+.selection {
+    width: 25%;
+    height: 100px;
+    min-width: 65px;
+    gap: 50px;
+
+}
 
 .score-parent {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+}
+
+.roundAudit {
+    padding-bottom: 10px;
+}
+.refreshBtn {
+    margin-left: 10px;
 }

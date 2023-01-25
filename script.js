@@ -113,27 +113,54 @@ function playRoundWrapper(e) {
     }
     
     if (parseInt(pScore.innerText) === 5) {
-        const selections = document.querySelectorAll('.selection');
-        selections.forEach(selection => selection.removeEventListener('click', playRoundWrapper));
-        const result = document.querySelector('.result');
-        result.innerText = "You win! Refresh to play again.";
-        result.setAttribute('visibility', true)
+        endGame(1)
 
     } else if (parseInt(cScore.innerText) === 5) {
-        const selections = document.querySelectorAll('.selection');
-        selections.forEach(selection => selection.removeEventListener('click', playRoundWrapper));
-        const result = document.querySelector('.result');
-        result.innerText = "Computer wins :(. Refresh to try again.";
-        result.setAttribute('visibility', true)
+        endGame(0)
     }
 
 }
 
 function startGame() {
+    
+    document.querySelector('.pScore').innerText = 0;
+    document.querySelector('.cScore').innerText = 0;
+    document.querySelector('.result').innerText='';
+    const roundAudit = document.querySelector('.roundAudit');
+    const refreshBtn = document.querySelector('.refreshBtn');
+    if (roundAudit) {
+        roundAudit.remove();
+    }
+    if (refreshBtn) {
+        refreshBtn.remove();
+    }
+
     const selections = document.querySelectorAll('.selection');
-    let pScore = 0;
-    let cScore = 0;
     selections.forEach(selection => selection.addEventListener('click', playRoundWrapper)); 
+}
+
+function endGame(winner) {
+    
+    let winnerText = '';
+    if (winner === 1) {
+        winnerText = "You win!"
+    } else if (winner === 0) {
+        winnerText = "Computer wins :("
+    }
+
+    // clean up event listeners on buttons to end the game
+    const selections = document.querySelectorAll('.selection');
+    selections.forEach(selection => selection.removeEventListener('click', playRoundWrapper));
+    const result = document.querySelector('.result');
+    result.innerText = winnerText;
+
+    const refreshBtn = document.createElement('button');
+    refreshBtn.setAttribute('class', 'refreshBtn');
+    refreshBtn.innerText = "Play again?";
+    refreshBtn.addEventListener('click', startGame)
+    result.appendChild(refreshBtn);
+
+
 }
 
 window.addEventListener('load', startGame)

@@ -100,6 +100,10 @@ function playRound(playerSelection, computerSelection) {
 
 function playRoundWrapper(e) {
 
+    if (document.querySelector('#instructions')) {
+        document.querySelector('#instructions').innerText = '';
+    }
+
     const selection = e.target.innerText;
     const pScore = document.querySelector('.pScore');
     const cScore = document.querySelector('.cScore');
@@ -126,6 +130,7 @@ function startGame() {
     document.querySelector('.pScore').innerText = 0;
     document.querySelector('.cScore').innerText = 0;
     document.querySelector('.result').innerText='';
+    document.querySelector('#instructions').innerText = 'Hello! To play, make a selection by clicking a button. Win 5 rounds to win the game! Good luck!';
     const roundAudit = document.querySelector('.roundAudit');
     const refreshBtn = document.querySelector('.refreshBtn');
     if (roundAudit) {

@@ -4,20 +4,21 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>TOP - Rock Paper Scissors</title>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 
 
 </head>
 <body>
   <table>
     <tr>
-      <td><button>Rock</button></td>
-      <td><button>Paper</button></td>
-      <td><button>Scissors</button></td>
+      <td><button class="selection">Rock</button></td>
+      <td><button class="selection">Paper</button></td>
+      <td><button class="selection">Scissors</button></td>
     </tr>
   </table>
-  <p>Hello. The current version of rock-paper-scissors is only played in the console. Good luck!</p>
-  <p>Run the function "game()" in the console to play!</p>
-  <p>Developer tools can be opened may ways. You can try Ctrl + Shift + I</p>
+  <div>Player: <div class="pScore">0</div></div>
+  <div>Computer: <div class="cScore">0</div></div>
+  <div class="result" visibility="false"></div>
+  <p>Hello! To play, make a selection by clicking a button. Win 5 rounds to win the game! Good luck!</p>
 </body>
 </html>

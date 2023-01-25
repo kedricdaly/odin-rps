@@ -62,7 +62,7 @@ function playRound(playerSelection, computerSelection) {
     }
        
 
-    let roundAudit = `player: ${playerSelection}\tcomputer: ${computerSelection}`
+    let roundAudit = `player: ${playerSelection}\ncomputer: ${computerSelection}`
     roundLog.innerText = roundAudit;
 
     if (playerSelection === computerSelection) {
